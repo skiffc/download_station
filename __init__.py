@@ -71,9 +71,12 @@ class   DownloadStation():
                 }
         files = {'file': (filename, torrent)}
         r = self.session.post( 'http://{}/webapi/DownloadStation/task.cgi'.format( self.ip ), data=data, files=files, verify=False)
+        print r.url
+        print r.content
         if r.status_code != 200:
             print '[ERROR] Upload torrent file fail.' 
             return False
         if not r.json()['success']:
             print '[ERROR] Upload torrent response fail.' 
             return False
+        return True
